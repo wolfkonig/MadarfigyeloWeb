@@ -1,0 +1,84 @@
+﻿@model MadarfigyeloWeb.Models.Odu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Odu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OduAzonosito)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OduAzonosito)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OduTipus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OduTipus)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BejaratiNyilasMm)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BejaratiNyilasMm)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GpsLatitude)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GpsLatitude)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GpsLongitude)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GpsLongitude)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Elohelykod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Elohelykod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MireVanHelyezve)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MireVanHelyezve)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FelhelyezesModja)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FelhelyezesModja)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OduTajolasa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OduTajolasa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OdutTartoNovenyfaj)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OdutTartoNovenyfaj)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MagassagMeter)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MagassagMeter)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

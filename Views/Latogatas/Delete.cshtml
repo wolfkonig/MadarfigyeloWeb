@@ -1,0 +1,69 @@
+﻿@model MadarfigyeloWeb.Models.Latogatas
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Latogatas</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Datum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Datum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tevekenyseg)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tevekenyseg)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Allapot)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Allapot)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Faj)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Faj)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TojasSzam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TojasSzam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FiokaSzam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FiokaSzam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FiokakKora)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FiokakKora)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Megjegyzesek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Megjegyzesek)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

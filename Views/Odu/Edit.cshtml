@@ -1,0 +1,84 @@
+﻿@model MadarfigyeloWeb.Models.Odu
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Odu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="OduAzonosito" class="control-label"></label>
+                <input asp-for="OduAzonosito" class="form-control" />
+                <span asp-validation-for="OduAzonosito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OduTipus" class="control-label"></label>
+                <input asp-for="OduTipus" class="form-control" />
+                <span asp-validation-for="OduTipus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BejaratiNyilasMm" class="control-label"></label>
+                <input asp-for="BejaratiNyilasMm" class="form-control" />
+                <span asp-validation-for="BejaratiNyilasMm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GpsLatitude" class="control-label"></label>
+                <input asp-for="GpsLatitude" class="form-control" />
+                <span asp-validation-for="GpsLatitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GpsLongitude" class="control-label"></label>
+                <input asp-for="GpsLongitude" class="form-control" />
+                <span asp-validation-for="GpsLongitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Elohelykod" class="control-label"></label>
+                <input asp-for="Elohelykod" class="form-control" />
+                <span asp-validation-for="Elohelykod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MireVanHelyezve" class="control-label"></label>
+                <input asp-for="MireVanHelyezve" class="form-control" />
+                <span asp-validation-for="MireVanHelyezve" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FelhelyezesModja" class="control-label"></label>
+                <input asp-for="FelhelyezesModja" class="form-control" />
+                <span asp-validation-for="FelhelyezesModja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OduTajolasa" class="control-label"></label>
+                <input asp-for="OduTajolasa" class="form-control" />
+                <span asp-validation-for="OduTajolasa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OdutTartoNovenyfaj" class="control-label"></label>
+                <input asp-for="OdutTartoNovenyfaj" class="form-control" />
+                <span asp-validation-for="OdutTartoNovenyfaj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MagassagMeter" class="control-label"></label>
+                <input asp-for="MagassagMeter" class="form-control" />
+                <span asp-validation-for="MagassagMeter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

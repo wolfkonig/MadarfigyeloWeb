@@ -6,8 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<MvcTestContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MvcTestContext")));
+#if DEBUG
+var connStringName = "TerepnaploLocal";
+#else
+var connStringName = "Terepnaplo";
+#endif
+
+builder.Services.AddDbContext<TerepnaploContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString(connStringName)));
 
 var app = builder.Build();
 
