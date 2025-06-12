@@ -1,7 +1,13 @@
+using MadarfigyeloWeb.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MvcTestContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MvcTestContext")));
 
 var app = builder.Build();
 
