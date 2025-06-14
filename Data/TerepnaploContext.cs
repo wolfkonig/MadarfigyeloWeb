@@ -9,8 +9,6 @@ namespace MadarfigyeloWeb.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Odu>().Property(o => o.GpsLatitude).HasPrecision(9, 6);
-            modelBuilder.Entity<Odu>().Property(o => o.GpsLongitude).HasPrecision(9, 6);
             base.OnModelCreating(modelBuilder);
         }
 

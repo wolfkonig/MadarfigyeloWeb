@@ -17,27 +17,23 @@ namespace MadarfigyeloWeb.Models
         [DisplayName("Bejárati nyílás átmérője (mm)")]
         public int BejaratiNyilasMm {  get; set; }
         [DisplayName("GPS hosszúság")]
-        [Comment("GPS használata esetén kötelező")]
         [Precision(9, 6)]
         public Decimal GpsLatitude { get; set; }
         [DisplayName("GPS szélesség")]
-        [Comment("GPS használata esetén kötelező")]
         [Precision(9, 6)]
         public Decimal GpsLongitude { get; set; }
         [DisplayName("Élőhelykód")]
-        public string Elohelykod {  get; set; }
+        public string? Elohelykod {  get; set; }
         [DisplayName("Mire van helyezve")]
-        public string MireVanHelyezve { get; set; }
+        public string? MireVanHelyezve { get; set; }
         [DisplayName("Felhelyezés módja")]
-        public string FelhelyezesModja { get; set; }
+        public string? FelhelyezesModja { get; set; }
         [DisplayName("Odú tájolása")]
-        public string OduTajolasa { get; set; }
+        public string? OduTajolasa { get; set; }
         [DisplayName("Odút tartó növényfaj")]
-        [Comment("ha fára, bokorra, vagy más növényre került")]
-        public string OdutTartoNovenyfaj { get; set; }
+        public string? OdutTartoNovenyfaj { get; set; }
         [DisplayName("Magasság (m)")]
-        [Comment("a talajtól")]
-        public string MagassagMeter {  get; set; }
+        public string? MagassagMeter {  get; set; }
         public ICollection<Latogatas>? Latogatas { get; set; }
      }
 }

@@ -10,6 +10,7 @@ namespace MadarfigyeloWeb.Models
         public int Id { get; set; }
         public Odu? Odu { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Dátum")]
         public DateTime Datum {  get; set; }
         [EnumDataType(typeof(Tevekenyseg))]
@@ -19,14 +20,12 @@ namespace MadarfigyeloWeb.Models
         [DisplayName("Állapot")]
         public Allapot Allapot { get; set; }
         [DisplayName("Faj vagy genus")]
-        [Comment("HURING kód vagy magyar név")]
         public string Faj {  get; set; }
         [DisplayName("Tojás szám")]
         public int TojasSzam { get; set; }
         [DisplayName("Fióka szám")]
         public int FiokaSzam { get; set; }
         [DisplayName("Fiókák kora")]
-        [Comment("Az útmutatóban leírt 5 korcsoport szerint")]
         public string? FiokakKora {  get; set; }
         [DisplayName("Megjegyzések")]
         public string? Megjegyzesek { get; set; }
