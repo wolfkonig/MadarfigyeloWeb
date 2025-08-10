@@ -79,6 +79,14 @@ namespace MadarfigyeloWeb.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.Oduk = await _context.Odu
+                .Select(o => new SelectListItem
+                {
+                    Value = o.Id.ToString(),
+                    Text = o.OduAzonosito
+                }).ToListAsync();
+
             return View(latogatas);
         }
 
