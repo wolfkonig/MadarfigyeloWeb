@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MadarfigyeloWeb.Data;
 using MadarfigyeloWeb.Models;
 
-namespace MadarfigyeloWeb
+namespace MadarfigyeloWeb.Controllers
 {
     public class OdutelepController : Controller
     {

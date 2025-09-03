@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MadarfigyeloWeb.Data;
 using MadarfigyeloWeb.Models;
 
-namespace MadarfigyeloWeb
+namespace MadarfigyeloWeb.Controllers
 {
     public class OduController : Controller
     {
@@ -48,7 +48,11 @@ namespace MadarfigyeloWeb
         // GET: Odu/Create
         public IActionResult Create()
         {
-            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Id");
+
+            //var items = _context.Odutelep
+            //    .Select(x => new SelectListItem(x.Azonosito, x.Id.ToString()));
+
+            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Azonosito");
             return View();
         }
 
@@ -65,7 +69,7 @@ namespace MadarfigyeloWeb
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Id", odu.OdutelepId);
+            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Azonosito", odu.OdutelepId);
             return View(odu);
         }
 
@@ -82,7 +86,7 @@ namespace MadarfigyeloWeb
             {
                 return NotFound();
             }
-            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Id", odu.OdutelepId);
+            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Azonosito", odu.OdutelepId);
             return View(odu);
         }
 
@@ -118,7 +122,7 @@ namespace MadarfigyeloWeb
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Id", odu.OdutelepId);
+            ViewData["OdutelepId"] = new SelectList(_context.Odutelep, "Id", "Azonosito", odu.OdutelepId);
             return View(odu);
         }
 

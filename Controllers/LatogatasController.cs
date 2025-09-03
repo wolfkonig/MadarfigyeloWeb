@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MadarfigyeloWeb.Data;
 using MadarfigyeloWeb.Models;
 
-namespace MadarfigyeloWeb
+namespace MadarfigyeloWeb.Controllers
 {
     public class LatogatasController : Controller
     {
@@ -48,7 +48,7 @@ namespace MadarfigyeloWeb
         // GET: Latogatas/Create
         public IActionResult Create()
         {
-            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "Id");
+            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "OduAzonosito");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace MadarfigyeloWeb
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "Id", latogatas.OduId);
+            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "OduAzonosito", latogatas.OduId);
             return View(latogatas);
         }
 
@@ -82,7 +82,7 @@ namespace MadarfigyeloWeb
             {
                 return NotFound();
             }
-            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "Id", latogatas.OduId);
+            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "OduAzonosito", latogatas.OduId);
             return View(latogatas);
         }
 
@@ -118,7 +118,7 @@ namespace MadarfigyeloWeb
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "Id", latogatas.OduId);
+            ViewData["OduId"] = new SelectList(_context.Odu, "Id", "OduAzonosito", latogatas.OduId);
             return View(latogatas);
         }
 

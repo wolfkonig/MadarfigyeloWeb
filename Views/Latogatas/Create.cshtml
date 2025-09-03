@@ -13,7 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="OduId" class="control-label"></label>
+                <label asp-for="OduId" class="control-label">OduAzonosito</label>
                 <select asp-for="OduId" class ="form-control" asp-items="ViewBag.OduId"></select>
             </div>
             <div class="form-group">
@@ -23,12 +23,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tevekenyseg" class="control-label"></label>
-                <select asp-for="Tevekenyseg" class="form-control"></select>
+                <select asp-for="Tevekenyseg" class="form-control"
+                        asp-items="Html.GetEnumSelectList<Tevekenyseg>()"></select>
                 <span asp-validation-for="Tevekenyseg" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Allapot" class="control-label"></label>
-                <select asp-for="Allapot" class="form-control"></select>
+                <select asp-for="Allapot" class="form-control" 
+                    asp-items="Html.GetEnumSelectList<Allapot>()"></select>
                 <span asp-validation-for="Allapot" class="text-danger"></span>
             </div>
             <div class="form-group">
