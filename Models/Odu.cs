@@ -46,6 +46,6 @@ namespace MadarfigyeloWeb.Models
         public string? OdutTartoNovenyfaj { get; set; }
         [DisplayName("Magasság (m)")]
         public string? MagassagMeter {  get; set; }
-        public ICollection<Latogatas>? Latogatas { get; set; }
+        public ICollection<Latogatas>? Latogatasok { get; set; }
      }
 }
