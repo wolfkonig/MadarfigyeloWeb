@@ -17,6 +17,23 @@ builder.Services.AddDbContext<TerepnaploContext>(options =>
 
 var app = builder.Build();
 
+// Migrate database if necessary
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<TerepnaploContext>();
+        // This applies any pending migrations and creates the DB if it doesn't exist
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
