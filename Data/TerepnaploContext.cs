@@ -1,9 +1,10 @@
 ﻿using MadarfigyeloWeb.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MadarfigyeloWeb.Data
 {
-    public class TerepnaploContext : DbContext
+    public class TerepnaploContext : IdentityDbContext<ApplicationUser>
     {
         public TerepnaploContext(DbContextOptions<TerepnaploContext> options) : base(options) { }
 
