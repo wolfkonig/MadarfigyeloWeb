@@ -1,7 +1,9 @@
 # ASP.NET Core Identity + JWT Authentication - Implementation Guide
 
 ## Overview
-ASP.NET Core Identity has been successfully integrated with JWT Bearer token authentication for the MadarfigyeloWeb API.
+ASP.NET Core Identity has been successfully integrated with **dual authentication modes**:
+- **Cookie-based authentication** for the web application (MVC views)
+- **JWT Bearer token authentication** for API endpoints
 
 ## What Was Added
 
@@ -11,15 +13,27 @@ ASP.NET Core Identity has been successfully integrated with JWT Bearer token aut
 - `System.IdentityModel.Tokens.Jwt` (8.2.1)
 
 ### 2. New Files Created
+
+#### Web Authentication
+- **Controllers/AccountController.cs** - Web login/register/logout endpoints
+- **Models/ViewModels/AccountViewModels.cs** - View models for login/register forms
+- **Views/Account/Login.cshtml** - Login page
+- **Views/Account/Register.cshtml** - Registration page
+- **Views/Account/AccessDenied.cshtml** - Access denied page
+- **Views/Shared/_LoginPartial.cshtml** - Login/logout navigation partial
+
+#### API Authentication
 - **Models/ApplicationUser.cs** - Custom user model extending IdentityUser
-- **Models/DTOs/AuthDtos.cs** - DTOs for registration, login, and auth responses
-- **API/AuthController.cs** - Authentication endpoints for register/login
+- **Models/DTOs/AuthDtos.cs** - DTOs for API registration, login, and auth responses
+- **API/AuthController.cs** - API authentication endpoints for register/login
 
 ### 3. Modified Files
 - **Data/TerepnaploContext.cs** - Now inherits from `IdentityDbContext<ApplicationUser>`
-- **Program.cs** - Configured Identity and JWT authentication
+- **Program.cs** - Configured Identity with both Cookie and JWT authentication
 - **appsettings.json** - Added JWT configuration section
-- **API Controllers** - All API controllers now have `[Authorize]` attribute
+- **Views/Shared/_Layout.cshtml** - Added login/logout links and navigation menu
+- **Controllers/** - All MVC controllers (Odutelep, Odu, Latogatas) now have `[Authorize]` attribute
+- **API/** - All API controllers now have `[Authorize]` attribute with JWT Bearer
 
 ### 4. Database Migration
 - Migration "AddIdentity" created (needs to be applied to database)
@@ -39,6 +53,23 @@ ASP.NET Core Identity has been successfully integrated with JWT Bearer token aut
 ⚠️ **IMPORTANT**: Change the JWT Key in production to a secure, randomly generated value!
 
 ## API Endpoints
+
+## Web Authentication (Cookie-Based)
+
+The website uses traditional cookie-based authentication. Users can:
+
+1. **Access the website** - Navigate to `https://localhost:7xxx`
+2. **Register** - Click "Register" in the navigation or go to `/Account/Register`
+3. **Login** - Click "Login" in the navigation or go to `/Account/Login`
+4. **Access protected pages** - After logging in, access:
+   - Ódutelepek (`/Odutelep`)
+   - Óduak (`/Odu`)
+   - Látogatások (`/Latogatas`)
+5. **Logout** - Click "Logout" in the navigation
+
+When a user tries to access a protected page without logging in, they'll be automatically redirected to the login page.
+
+## API Authentication (JWT Bearer Token)
 
 ### Authentication Endpoints (No Authorization Required)
 
@@ -116,13 +147,21 @@ Run the following command to update your database with Identity tables:
 dotnet ef database update
 ```
 
-### 2. Test Authentication
-1. Use a tool like Postman, Insomnia, or curl to test the endpoints
+### 2. Test Web Authentication
+1. Run the application (`F5` or `dotnet run`)
+2. Navigate to `https://localhost:7xxx`
+3. Click "Register" and create a new account
+4. After registration, you'll be automatically logged in
+5. Try accessing the protected pages (Ódutelepek, Óduak, Látogatások)
+6. Click "Logout" to sign out
+
+### 3. Test API Authentication
+1. Use a tool like Postman, Insomnia, or curl to test the API endpoints
 2. Register a new user via `/api/auth/register`
 3. Copy the returned JWT token
-4. Use the token in the `Authorization: Bearer <token>` header for protected endpoints
+4. Use the token in the `Authorization: Bearer <token>` header for protected API endpoints
 
-### 3. Optional Enhancements
+### 4. Optional Enhancements
 
 Consider adding:
 - **Role-based authorization** - Add roles like "Admin", "User", etc.
@@ -185,10 +224,32 @@ Before deploying to production:
 
 ## Architecture
 
+### Web Authentication Flow (Cookie-Based)
+```
+User visits protected page
+        ↓
+Not authenticated? → Redirect to /Account/Login
+        ↓
+User enters credentials
+        ↓
+AccountController validates with Identity
+        ↓
+SignInManager creates authentication cookie
+        ↓
+User redirected back to original page
+        ↓
+All subsequent requests include cookie
+        ↓
+Cookie middleware validates identity
+        ↓
+MVC Controller processes request
+```
+
+### API Authentication Flow (JWT)
 ```
 User Registration/Login
         ↓
-   AuthController
+   AuthController (API)
         ↓
    UserManager/SignInManager (Identity)
         ↓
@@ -204,6 +265,44 @@ JWT Middleware validates token
         ↓
 Protected API Controller processes request
 ```
+
+## Authentication Summary
+
+| Feature | Web (MVC) | API |
+|---------|-----------|-----|
+| **Authentication Method** | Cookie-based | JWT Bearer Token |
+| **Login Endpoint** | `/Account/Login` (GET/POST) | `/api/auth/login` (POST) |
+| **Register Endpoint** | `/Account/Register` (GET/POST) | `/api/auth/register` (POST) |
+| **Logout** | `/Account/Logout` (POST) | Token expiration (no server-side logout) |
+| **Token/Cookie Duration** | 24 hours (sliding) | 60 minutes (fixed) |
+| **Authorization Header** | Not needed (cookie auto-sent) | `Authorization: Bearer <token>` required |
+| **Protected Resources** | MVC Controllers/Views | API Controllers |
+| **Auto-Redirect on Unauthorized** | Yes (to login page) | No (returns 401) |
+
+## Key Features Implemented
+
+✅ **Dual Authentication Modes**
+- Cookie authentication for web pages
+- JWT authentication for API endpoints
+- Both use the same Identity user store
+
+✅ **Protected Resources**
+- All MVC controllers require authentication (Odutelep, Odu, Latogatas)
+- All API controllers require JWT tokens
+- Home and Account controllers are public
+
+✅ **User Interface**
+- Responsive login/register forms with Bootstrap 5
+- Navigation bar shows login status
+- Login/Register links for anonymous users
+- User greeting and Logout button for authenticated users
+
+✅ **Security Features**
+- Password requirements enforced
+- Anti-forgery tokens on forms
+- HTTPS redirection
+- Sliding expiration on cookies
+- Automatic redirect to login for unauthorized web access
 
 ## Database Tables Added by Identity
 
