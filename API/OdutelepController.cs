@@ -13,7 +13,7 @@ namespace MadarfigyeloWeb.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class OdutelepController : ControllerBase
     {
         private readonly TerepnaploContext _context;
