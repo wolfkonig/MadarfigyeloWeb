@@ -1,12 +1,12 @@
 @model MadarfigyeloWeb.Models.ViewModels.RegisterViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Regisztráció";
 }
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
         <h2 class="text-center mb-4">@ViewData["Title"]</h2>
-        <p class="text-center text-muted mb-4">Create a new account</p>
+        <p class="text-center text-muted mb-4">Új fiók létrehozása</p>
         
         <form asp-action="Register" method="post">
             <div asp-validation-summary="All" class="text-danger mb-3"></div>
@@ -20,14 +20,14 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                        <input asp-for="FirstName" class="form-control" placeholder="Keresztnév" />
                         <label asp-for="FirstName"></label>
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                        <input asp-for="LastName" class="form-control" placeholder="Vezetéknév" />
                         <label asp-for="LastName"></label>
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
@@ -35,35 +35,35 @@
             </div>
             
             <div class="form-floating mb-3">
-                <input asp-for="Password" class="form-control" placeholder="Password" autocomplete="new-password" />
+                <input asp-for="Password" class="form-control" placeholder="Jelszó" autocomplete="new-password" />
                 <label asp-for="Password"></label>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             
             <div class="form-floating mb-3">
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" autocomplete="new-password" />
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Jelszó megerősítése" autocomplete="new-password" />
                 <label asp-for="ConfirmPassword"></label>
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             
             <div class="alert alert-info small">
-                <strong>Password requirements:</strong>
+                <strong>Jelszó követelmények:</strong>
                 <ul class="mb-0">
-                    <li>At least 6 characters</li>
-                    <li>At least one uppercase letter</li>
-                    <li>At least one lowercase letter</li>
-                    <li>At least one digit</li>
+                    <li>Legalább 6 karakter</li>
+                    <li>Legalább egy nagybetű</li>
+                    <li>Legalább egy kisbetű</li>
+                    <li>Legalább egy szám</li>
                 </ul>
             </div>
             
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                <button type="submit" class="btn btn-primary btn-lg">Regisztráció</button>
             </div>
         </form>
         
         <div class="mt-3 text-center">
             <p>
-                Already have an account? <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">Log in</a>
+                Már van fiókod? <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">Jelentkezz be</a>
             </p>
         </div>
     </div>

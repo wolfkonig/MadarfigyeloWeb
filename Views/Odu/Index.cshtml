@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MadarfigyeloWeb.Models.Odu>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista";
 }
 
-<h1>Index</h1>
+<h1>Odúk</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Új létrehozása</a>
 </p>
 <table class="table">
     <thead>
@@ -91,9 +91,9 @@
                 @Html.DisplayFor(modelItem => item.MagassagMeter)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Szerkesztés</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Részletek</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Törlés</a>
             </td>
         </tr>
 }

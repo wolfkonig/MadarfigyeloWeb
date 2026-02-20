@@ -85,7 +85,7 @@ namespace MadarfigyeloWeb.Controllers
                     return LocalRedirect(returnUrl ?? "/");
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Érvénytelen bejelentkezési kísérlet.");
             }
 
             return View(model);

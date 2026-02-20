@@ -30,7 +30,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequiredLength = 6;
 })
 .AddEntityFrameworkStores<TerepnaploContext>()
-.AddDefaultTokenProviders();
+.AddDefaultTokenProviders()
+.AddErrorDescriber<HungarianIdentityErrorDescriber>();
 
 // Configure cookie settings for web authentication
 builder.Services.ConfigureApplicationCookie(options =>
