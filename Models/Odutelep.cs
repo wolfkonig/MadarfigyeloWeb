@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MadarfigyeloWeb.Models
 {
@@ -28,7 +29,7 @@ namespace MadarfigyeloWeb.Models
         public string? FelelosSzemelyEmail { get; set; }
         [DisplayName("Megjegyzés")]
         public string? Megjegyzes { get; set; }
-
+        [JsonIgnore]
         public ICollection<Odu>? Oduk {  get; set; }
     }
 }

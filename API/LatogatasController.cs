@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MadarfigyeloWeb.Data;
@@ -27,7 +22,10 @@ namespace MadarfigyeloWeb.API
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Latogatas>>> GetLatogatas()
         {
-            return await _context.Latogatas.ToListAsync();
+            return await _context.Latogatas
+                .Include(l => l.Odu)
+                .OrderByDescending(l => l.Datum)
+                .ToListAsync();
         }
 
         // GET: api/Latogatas/5
@@ -42,6 +40,17 @@ namespace MadarfigyeloWeb.API
             }
 
             return latogatas;
+        }
+
+        // GET: api/Latogatas/ByParent/5
+        [HttpGet("ByParent/{oduId}")]
+        public async Task<ActionResult<IEnumerable<Latogatas>>> GetLatogatasByOdu(int oduId)
+        {
+            return await _context.Latogatas
+                .Where(l => l.OduId == oduId)
+                .Include(l => l.Odu)
+                .OrderByDescending(l => l.Datum)
+                .ToListAsync();
         }
 
         // POST: api/Latogatas

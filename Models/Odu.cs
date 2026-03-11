@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MadarfigyeloWeb.Models
 {
@@ -46,6 +47,7 @@ namespace MadarfigyeloWeb.Models
         public string? OdutTartoNovenyfaj { get; set; }
         [DisplayName("Magasság (m)")]
         public string? MagassagMeter {  get; set; }
+        [JsonIgnore]
         public ICollection<Latogatas>? Latogatasok { get; set; }
      }
 }

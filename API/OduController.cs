@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MadarfigyeloWeb.Data;
@@ -27,7 +22,11 @@ namespace MadarfigyeloWeb.API
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Odu>>> GetOdu()
         {
-            return await _context.Odu.ToListAsync();
+            return await _context.Odu
+                .Include(o => o.Odutelep)
+                .OrderBy(o => o.OdutelepId)
+                .ThenBy(o => o.OduAzonosito)
+                .ToListAsync();
         }
 
         // GET: api/Odu/5
@@ -42,6 +41,17 @@ namespace MadarfigyeloWeb.API
             }
 
             return odu;
+        }
+
+        // GET: api/Odu/ByParent/5
+        [HttpGet("ByParent/{odutelepId}")]
+        public async Task<ActionResult<IEnumerable<Odu>>> GetOduByOdutelep(int odutelepId)
+        {
+            return await _context.Odu
+                .Where(o => o.OdutelepId == odutelepId)
+                .Include(o => o.Odutelep)
+                .OrderBy(o => o.OduAzonosito)
+                .ToListAsync();
         }
 
         // PUT: api/Odu/5
