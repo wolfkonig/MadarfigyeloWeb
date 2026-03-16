@@ -26,10 +26,12 @@ namespace MadarfigyeloWeb.Models
         
         [DisplayName("GPS hosszúság")]
         [Precision(9, 6)]
+        [DisplayFormat(DataFormatString = "{0:F6}", ApplyFormatInEditMode = true)]
         public Decimal GpsLatitude { get; set; }
         
         [DisplayName("GPS szélesség")]
         [Precision(9, 6)]
+        [DisplayFormat(DataFormatString = "{0:F6}", ApplyFormatInEditMode = true)]
         public Decimal GpsLongitude { get; set; }
         
         [DisplayName("Élőhelykód")]
