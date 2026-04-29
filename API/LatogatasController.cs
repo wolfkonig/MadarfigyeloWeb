@@ -24,7 +24,7 @@ namespace MadarfigyeloWeb.API
         {
             return await _context.Latogatas
                 .Include(l => l.Odu)
-                .OrderByDescending(l => l.Datum)
+                .OrderBy(l => l.Datum)
                 .ToListAsync();
         }
 
@@ -49,8 +49,39 @@ namespace MadarfigyeloWeb.API
             return await _context.Latogatas
                 .Where(l => l.OduId == oduId)
                 .Include(l => l.Odu)
-                .OrderByDescending(l => l.Datum)
+                .OrderBy(l => l.Datum)
                 .ToListAsync();
+        }
+
+        // PUT: api/Latogatas/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutLatogatas(int id, Latogatas latogatas)
+        {
+            if (id != latogatas.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(latogatas).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!LatogatasExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         // POST: api/Latogatas
