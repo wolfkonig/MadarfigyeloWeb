@@ -9,6 +9,22 @@
 <p>
     <a asp-action="Create">Új létrehozása</a>
 </p>
+
+<form asp-action="Index" method="get" class="row g-3 align-items-end mb-3">
+    <div class="col-md-4">
+        <label for="odutelepId" class="form-label">Odútelep szűrés</label>
+        <select id="odutelepId" name="odutelepId" class="form-select" asp-items="ViewBag.OdutelepId">
+            <option value="">Összes odútelep</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Szűrés</button>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Index" class="btn btn-secondary">Szűrés törlése</a>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

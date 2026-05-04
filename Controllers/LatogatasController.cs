@@ -22,10 +22,52 @@ namespace MadarfigyeloWeb.Controllers
         }
 
         // GET: Latogatas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? odutelepId, int? oduId)
         {
-            var terepnaploContext = _context.Latogatas.Include(l => l.Odu);
-            return View(await terepnaploContext.ToListAsync());
+            var latogatasQuery = _context.Latogatas
+                .Include(l => l.Odu)
+                .ThenInclude(o => o.Odutelep)
+                .AsQueryable();
+
+            var oduQuery = _context.Odu
+                .Include(o => o.Odutelep)
+                .AsQueryable();
+
+            if (odutelepId.HasValue)
+            {
+                latogatasQuery = latogatasQuery.Where(l => l.Odu != null && l.Odu.OdutelepId == odutelepId.Value);
+                oduQuery = oduQuery.Where(o => o.OdutelepId == odutelepId.Value);
+            }
+
+            if (oduId.HasValue)
+            {
+                var validOdu = await oduQuery.AnyAsync(o => o.Id == oduId.Value);
+                if (validOdu)
+                {
+                    latogatasQuery = latogatasQuery.Where(l => l.OduId == oduId.Value);
+                }
+                else
+                {
+                    oduId = null;
+                }
+            }
+
+            ViewData["OdutelepId"] = new SelectList(
+                await _context.Odutelep.OrderBy(o => o.Azonosito).ToListAsync(),
+                "Id",
+                "Azonosito",
+                odutelepId);
+
+            ViewData["OduId"] = new SelectList(
+                await oduQuery.OrderBy(o => o.OduAzonosito).ToListAsync(),
+                "Id",
+                "OduAzonosito",
+                oduId);
+
+            return View(await latogatasQuery
+                .OrderBy(l => l.Odu != null ? l.Odu.OduAzonosito : string.Empty)
+                .ThenByDescending(l => l.Datum)
+                .ToListAsync());
         }
 
         // GET: Latogatas/Details/5

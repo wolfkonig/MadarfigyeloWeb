@@ -22,10 +22,24 @@ namespace MadarfigyeloWeb.Controllers
         }
 
         // GET: Odu
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? odutelepId)
         {
-            var terepnaploContext = _context.Odu.Include(o => o.Odutelep);
-            return View(await terepnaploContext.ToListAsync());
+            var oduQuery = _context.Odu
+                .Include(o => o.Odutelep)
+                .AsQueryable();
+
+            if (odutelepId.HasValue)
+            {
+                oduQuery = oduQuery.Where(o => o.OdutelepId == odutelepId.Value);
+            }
+
+            ViewData["OdutelepId"] = new SelectList(
+                await _context.Odutelep.OrderBy(o => o.Azonosito).ToListAsync(),
+                "Id",
+                "Azonosito",
+                odutelepId);
+
+            return View(await oduQuery.ToListAsync());
         }
 
         // GET: Odu/Details/5
