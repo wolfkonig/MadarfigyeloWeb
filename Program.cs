@@ -1,5 +1,6 @@
 using MadarfigyeloWeb.Data;
 using MadarfigyeloWeb.Models;
+using MadarfigyeloWeb.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAccountEmailSender, DevelopmentAccountEmailSender>();
 
 #if DEBUG
 var connStringName = "TerepnaploLocal";
