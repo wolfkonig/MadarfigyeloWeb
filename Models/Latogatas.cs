@@ -8,6 +8,7 @@ namespace MadarfigyeloWeb.Models
     public class Latogatas
     {
         [Key]
+        [DisplayName("Biotika")]
         public int Id { get; set; }
 
         [ForeignKey("Id")]
