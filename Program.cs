@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IAccountEmailSender, DevelopmentAccountEmailSender>();
+builder.Services.Configure<SmtpEmailSettings>(builder.Configuration.GetSection("Smtp"));
+builder.Services.AddScoped<IAccountEmailSender, SmtpAccountEmailSender>();
 
 #if DEBUG
 var connStringName = "TerepnaploLocal";
