@@ -23,10 +23,14 @@ namespace MadarfigyeloWeb.Services
             message.Subject = "Jelszó-visszaállítás";
             message.IsBodyHtml = true;
             message.Body = $"""
-                <p>Jelszó-visszaállítási kérelmet kaptunk a fiókodhoz.</p>
-                <p>A jelszó módosításához kattints az alábbi linkre:</p>
-                <p><a href=\"{resetLink}\">Jelszó visszaállítása</a></p>
-                <p>Ha nem te kezdeményezted a kérelmet, ezt az emailt figyelmen kívül hagyhatod.</p>
+                <html>
+                <body>
+                    <p>Jelszó-visszaállítási kérelmet kaptunk a fiókodhoz.</p>
+                    <p>A jelszó módosításához kattints az alábbi linkre:</p>
+                    <p><a href="{resetLink}">Jelszó visszaállítása</a></p>
+                    <p>Ha nem te kezdeményezted a kérelmet, ezt az emailt figyelmen kívül hagyhatod.</p>
+                </body>
+                </html>
                 """;
 
             using var client = new SmtpClient(_settings.Host, _settings.Port)
@@ -43,7 +47,14 @@ namespace MadarfigyeloWeb.Services
                 client.UseDefaultCredentials = true;
             }
 
-            await client.SendMailAsync(message);
+            try 
+            { 
+                await client.SendMailAsync(message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Email küldése sikertelen: {ex.Message}");
+            }
         }
     }
 }
